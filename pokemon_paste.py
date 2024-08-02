@@ -15,6 +15,7 @@ import pastebin_api
 
 def main():
     poke_name = get_pokemon_name()
+    poke_name = "wobbuffet"
     poke_info = poke_api.get_pokemon_info(poke_name)
     if poke_info is not None:
         paste_title, paste_body = get_paste_data(poke_info)
@@ -32,7 +33,7 @@ def get_pokemon_name():
         return sys.argv[1]
     else:
         print('Error: Pokemon name not provided.')
-        sys.exit('Script execution aborted')
+        sys.exit(1)
     
 
 
@@ -47,14 +48,15 @@ def get_paste_data(pokemon_info):
     """    
     #  Build the paste title
     #  Build the paste body text
-    poke_name = pokemon_info['Poke_name'].capitalize()
+    poke_name = pokemon_info['name']
+    print(poke_name.capitalize())
     title = f'This is all about getting the Pokemon {poke_name}'
 
     # Build the paste body text
     body_text = ''
-    for p in pokemon_info['abilites']:
-        body_text += p ['abilities'] + '\n\n'
-    
+    for p in pokemon_info['abilities']:
+        body_text += p['ability']['name'] + '\n\n'
+
     # Return the paste data in a tuple
     return (title, body_text[:-2])
 

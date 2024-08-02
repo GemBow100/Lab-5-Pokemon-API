@@ -26,15 +26,8 @@ def get_pokemon_info(poke_name):
     #Clean the Pokemon name parameter
     poke_name = str(poke_name).strip().lower()
 
-    headers ={ 'Accept': 'Application /json'
-    }
-    get_params ={'entity': 'pokemon',
-                 'name':'Rockruff'
-    }    
-    #Build a clean URL and use it to send a GET request
-    print(f'Rockruff attack...', end= '')
-    url = 'https://pokeapi.co/api/v2/'
-    resp_msg = requests. get(url, params = get_params, headers=headers)
+    url = 'https://pokeapi.co/api/v2/pokemon/'
+    resp_msg = requests. get(f"{url}{poke_name}")
     print(resp_msg.url)
 
     #If the GET request was successful, convert the JSON-formatted message body text to a dictionary and return it
